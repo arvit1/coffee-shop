@@ -40,14 +40,14 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
 
         //Get the minor
         long lMinimalDiscount = getMinimalDiscount(iCountBeverage, iCountSnack);
-        List<Item> itemsForDiscount = new ArrayList<Item>();
+        List<Item> itemsForDiscount = new ArrayList<>();
         if(!productDiscountable.isEmpty() && lMinimalDiscount >0){
             if( lMinimalDiscount > productDiscountable.size()){
                 //add all element for discount
                 itemsForDiscount = getItemsFromProductsForDiscount(productDiscountable);
             }else{
                 //add the minimal element for discount
-                List<Product> productDiscountableTmp = new ArrayList<Product>();
+                List<Product> productDiscountableTmp = new ArrayList<>();
 
                 for (int i = 0; i < lMinimalDiscount; i++) {
                     productDiscountableTmp.add(productDiscountable.get(i));
@@ -81,7 +81,7 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
 
     //Get Item from Products
     private List<Item> getItemsFromProducts(List<Product> listProduct) {
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
 
         for (Product p : listProduct){
             Item i = new Item();
@@ -97,7 +97,7 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
 
     //Get Item from Products for Discount
     private List<Item> getItemsFromProductsForDiscount(List<Product> listProduct) {
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
 
         for (Product p : listProduct){
             Item i = new Item();

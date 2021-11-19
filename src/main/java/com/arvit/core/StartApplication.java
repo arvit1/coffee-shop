@@ -1,59 +1,73 @@
 package com.arvit.core;
 
+import com.arvit.core.domain.Product;
+import com.arvit.core.domain.Receipt;
+import com.arvit.core.services.CoffeeShopService;
+import com.arvit.core.services.CoffeeShopServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class StartApplication {
-    private static double itemPrice;
-    static Scanner input = new Scanner(System.in);
-    static double j = 0.0;
-    static double runningTotal = 0;
+    List<Product> productList = new ArrayList<>();
+    CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
 
     public static void main(String[] args) {
+        Scanner input;
         input = new Scanner(System.in);
-        switchCase(StartApplication.runningTotal);
+        StartApplication application = new StartApplication();
+        application.switchCase(input);
     }
 
-    private static void switchCase(double runningTotal) {
-        int foodItem;
+    private void switchCase(Scanner input) {
         int menuOption;
         while (true) {
             menu();
             menuOption = input.nextInt();
             switch (menuOption) {
                 case 1:
-                    foodItem = 1;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p = new Product("C", "small coffee", 2.50, "CHF", "B");
+                    System.out.println("You've ordered a small coffee");
+                    quantity(input, p);
                     break;
                 case 2:
-                    foodItem = 2;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p1 = new Product("B", "medium coffee", 3.00, "CHF", "B");
+                    System.out.println("You've ordered medium coffee");
+                    quantity(input, p1);
                     break;
                 case 3:
-                    foodItem = 3;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p2 = new Product("A", "large coffee", 3.50, "CHF", "B");
+                    System.out.println("You've ordered a large coffee");
+                    quantity(input, p2);
                     break;
                 case 4:
-                    foodItem = 4;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p3 = new Product("D", "Bacon Roll", 4.50, "CHF", "S");
+                    System.out.println("You've ordered a Bacon Roll");
+                    quantity(input, p3);
                     break;
                 case 5:
-                    foodItem = 5;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p4 = new Product("E", "orange juice", 3.95, "CHF", "E");
+                    System.out.println("You've ordered a orange juice");
+                    quantity(input, p4);
                     break;
                 case 6:
-                    foodItem = 6;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p5 = new Product("F", "Extra milk", 0.30, "CHF", "E");
+                    System.out.println("You've ordered a small coffee");
+                    quantity(input, p5);
                     break;
                 case 7:
-                    foodItem = 7;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p6 = new Product("G", "Foamed milk", 0.50, "CHF", "E");
+                    System.out.println("You've ordered a Foamed milk");
+                    quantity(input, p6);
                     break;
                 case 8:
-                    foodItem = 8;
-                    StartApplication.runningTotal += ItemPrice(foodItem);
+                    Product p7 = new Product("H", "roast coffee", 0.90, "CHF", "E");
+                    System.out.println("You've ordered a roast coffee");
+                    quantity(input, p7);
                     break;
                 case 9:
-                    done(StartApplication.runningTotal);
+                    done();
                     break;
                 case 10:
                     System.exit(0);
@@ -64,75 +78,23 @@ public class StartApplication {
         }
     }
 
-    public static void menu() {
+    public void menu() {
         System.out.println("Welcome \n1. small coffee (2.50 CHF) " +
                 "\n2. medium coffee (3.00 CHF)\n3. large coffee (3.50 CHF) \n4. Bacon Roll (4.50 CHF) " +
                 "\n5. orange juice (3.95 CHF) \n6. Extra milk (0.30 CHF) \n7. Foamed milk (0.50 CHF) " +
                 "\n8. roast coffee (0.90 CHF) \n9. Done \n10. exit");
     }
 
-    public static double ItemPrice(int foodItem) {
-        if (foodItem == 1) {
-            // small coffee= 2.50 CHF
-            System.out.println("You've ordered a small coffee");
-            itemPrice = 2.50;
-        }
-        if (foodItem == 2) {
-            // medium coffee = 3.00 CHF
-            System.out.println("You've ordered medium coffee");
-            itemPrice = 3.00;
-        }
-        if (foodItem == 3) {
-            // large coffee = 3.50 CHF
-            System.out.println("You've ordered a large coffee");
-            itemPrice = 3.50;
-        }
-        if (foodItem == 4) {
-            // Bacon Roll = 4.50 CHF
-            System.out.println("You've ordered a Bacon Roll");
-            itemPrice = 4.50;
-        }
-        if (foodItem == 5) {
-            // orange juice = 3.95 CHF
-            System.out.println("You've ordered a orange juice");
-            itemPrice = 3.95;
-        }
-        if (foodItem == 6) {
-            // Extra milk = 0.30 CHF
-            System.out.println("You've ordered a Extra milk");
-            itemPrice = 0.30;
-        }
-        if (foodItem == 7) {
-            // Foamed milk = 0.50 CHF
-            System.out.println("You've ordered a Foamed milk");
-            itemPrice = 0.50;
-        }
-        if (foodItem == 8) {
-            // roast coffee = 0.90 CHF
-            System.out.println("You've ordered a roast coffee");
-            itemPrice = 0.90;
-        }
-        quantity();
-        return j;
-    }
-
-    public static double quantity() {
+    public void quantity(Scanner input, Product p) {
         System.out.println("Enter quantity");
         double quantity = input.nextDouble();
-        subTotal(quantity, itemPrice);
-        return quantity;
+        for (int i = 1; i <= quantity; i++) {
+            productList.add(p);
+        }
     }
 
-    public static double subTotal(double quantity, double itemPrice) {
-        double subTotal = quantity * itemPrice;
-        System.out.println("Subtotal: " + subTotal + " CHF");
-        j = subTotal;
-        return subTotal;
-    }
-
-    public static void done(double runningTotal) {
-        System.out.println("Total amount: " + runningTotal + " CHF");
-        System.out.println("Enjoy your meal");
-        StartApplication.runningTotal = 0;
+    public void done() {
+        Receipt receipt = coffeeShopService.get(productList);
+        System.out.println(receipt);
     }
 }
