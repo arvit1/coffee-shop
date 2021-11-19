@@ -3,14 +3,12 @@ package com.cognizant.core.services;
 import com.cognizant.core.domain.Item;
 import com.cognizant.core.domain.Product;
 import com.cognizant.core.domain.Receipt;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Service
 public class CoffeeShopServiceImpl implements  CoffeeShopService{
 
     @Override

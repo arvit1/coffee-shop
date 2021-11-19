@@ -4,20 +4,15 @@ import com.cognizant.core.domain.Product;
 import com.cognizant.core.domain.Receipt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
 public class CoffeeShopServiceTest {
 
-    @Autowired
-    CoffeeShopService coffeeShopService;
+    CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
 
     @DisplayName("Test Spring @Autowired Integration")
     @Test
