@@ -1,7 +1,7 @@
-package com.cognizant.core.services;
+package com.arvit.core.services;
 
-import com.cognizant.core.domain.Product;
-import com.cognizant.core.domain.Receipt;
+import com.arvit.core.domain.Product;
+import com.arvit.core.domain.Receipt;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;

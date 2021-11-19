@@ -1,4 +1,4 @@
-package com.cognizant.core.domain;
+package com.arvit.core.domain;
 
 import java.util.ArrayList;
 import java.util.Date;

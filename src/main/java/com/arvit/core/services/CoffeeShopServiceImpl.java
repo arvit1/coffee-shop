@@ -1,8 +1,8 @@
-package com.cognizant.core.services;
+package com.arvit.core.services;
 
-import com.cognizant.core.domain.Item;
-import com.cognizant.core.domain.Product;
-import com.cognizant.core.domain.Receipt;
+import com.arvit.core.domain.Item;
+import com.arvit.core.domain.Product;
+import com.arvit.core.domain.Receipt;
 
 import java.util.ArrayList;
 import java.util.Date;

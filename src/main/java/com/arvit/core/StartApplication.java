@@ -1,4 +1,4 @@
-package com.cognizant.core;
+package com.arvit.core;
 
 public class StartApplication {
 

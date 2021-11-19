@@ -1,25 +1,20 @@
-package com.cognizant.core.domain;
+package com.arvit.core.domain;
 
-public class Product {
+public class Item {
     String id;
+    String idProduct;
     String description;
     Double price;
     String currency;
     String typeProduct;
 
-    public Product() { }
-
-    public Product(String id, String description, Double price, String currency, String typeProduct) {
-        this.id = id;
-        this.description = description;
-        this.price = price;
-        this.currency = currency;
-        this.typeProduct = typeProduct;
-    }
-
     public String getId() { return id; }
 
     public void setId(String id) { this.id = id; }
+
+    public String getIdProduct() { return idProduct; }
+
+    public void setIdProduct(String idProduct) { this.idProduct = idProduct; }
 
     public String getDescription() { return description; }
 
@@ -36,4 +31,7 @@ public class Product {
     public String getTypeProduct() { return typeProduct; }
 
     public void setTypeProduct(String typeProduct) { this.typeProduct = typeProduct; }
+
+    public String toString() { return "" + description + ", " + price+ ", " + currency + ""  +"\n"; }
+
 }
