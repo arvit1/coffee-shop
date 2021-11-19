@@ -2,21 +2,17 @@ package com.cognizant.core.services;
 
 import com.cognizant.core.domain.Product;
 import com.cognizant.core.domain.Receipt;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Assert;
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CoffeeShopServiceTest {
 
     CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
 
-    @DisplayName("Test Spring @Autowired Integration")
     @Test
-    void testGet() {
+    public void testGet() {
         List<Product> productList = new ArrayList<Product>();
 
         /*
@@ -57,7 +53,7 @@ public class CoffeeShopServiceTest {
 
         System.out.println(receipt);
 
-        assertNotNull(receipt);
+        Assert.assertNotNull(receipt);
 
     }
 
