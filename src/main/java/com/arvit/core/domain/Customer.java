@@ -1,26 +1,35 @@
 package com.arvit.core.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 public class Customer {
-    String id;
+    int id;
     String firstName;
     String lastName;
     Date birthDate;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public Customer() { }
 
-    public Customer(String id, String firstName, String lastName, Date birthDate) {
+    public Customer(int id, String firstName, String lastName, Date birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
 
-    public void setId(String id) { this.id = id; }
+    public Customer(int id, String firstName, String lastName, String birthDate) throws ParseException {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = sdf.parse(birthDate);
+    }
 
-    public String getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public int getId() { return id; }
 
     public Date getBirthDate() { return birthDate; }
 
@@ -36,11 +45,9 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id='" + id + '\'' +
+        return "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
+                ", birthDate=" + birthDate;
     }
 }

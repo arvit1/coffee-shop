@@ -7,9 +7,11 @@ import com.arvit.core.repository.CustomerRepository;
 import com.arvit.core.services.CoffeeShopService;
 import com.arvit.core.services.CoffeeShopServiceImpl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class StartApplication {
     List<Product> productList = new ArrayList<>();
@@ -17,14 +19,14 @@ public class StartApplication {
     CustomerRepository customerRepository = new CustomerRepository();
     Customer customer = new Customer();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Scanner input;
         input = new Scanner(System.in);
         StartApplication application = new StartApplication();
         application.switchCase(input);
     }
 
-    private void switchCase(Scanner input) {
+    private void switchCase(Scanner input) throws ParseException {
         int menuOption;
         menu1(input);
         while (true) {
@@ -84,14 +86,21 @@ public class StartApplication {
         }
     }
 
-    public void menu1(Scanner input) {
-        System.out.println("Select Customer");
+    public void menu1(Scanner input) throws ParseException {
+        System.out.println("Select Customer by id or press 0 te create a new");
         for (Customer customer1 : customerRepository.getAll()){
             System.out.println(customer1);
         }
-        String idCustomer = input.nextLine();
-        this.customer = customerRepository.find(idCustomer);
-        System.out.println("Hello customer : " + customer.getFirstName());
+        int idCustomer = input.nextInt();
+        if (idCustomer == 0){
+            System.out.println("create a new customer comma delimited firstName, lastName, birthDate (example \"2013-09-18\")");
+            String s = input.nextLine();
+            String[] tokens=s.split(",");
+            customer = new Customer(CustomerRepository.id++, tokens[0], tokens[1], tokens[2]);
+        } else {
+            this.customer = customerRepository.find(idCustomer);
+        }
+        System.out.println("Hello customer : " + customer);
     }
 
     public void menu() {
