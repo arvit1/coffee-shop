@@ -15,6 +15,7 @@ public class StartApplication {
     List<Product> productList = new ArrayList<>();
     CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
     CustomerRepository customerRepository = new CustomerRepository();
+    Customer customer = new Customer();
 
     public static void main(String[] args) {
         Scanner input;
@@ -25,6 +26,7 @@ public class StartApplication {
 
     private void switchCase(Scanner input) {
         int menuOption;
+        menu1(input);
         while (true) {
             menu();
             menuOption = input.nextInt();
@@ -71,6 +73,7 @@ public class StartApplication {
                     break;
                 case 9:
                     done();
+                    switchCase(input);
                     break;
                 case 10:
                     System.exit(0);
@@ -81,16 +84,22 @@ public class StartApplication {
         }
     }
 
-    public void menu() {
+    public void menu1(Scanner input) {
         System.out.println("Select Customer");
-        for (Customer customer : customerRepository.getAll()){
-            System.out.println(customer);
+        for (Customer customer1 : customerRepository.getAll()){
+            System.out.println(customer1);
         }
+        String idCustomer = input.nextLine();
+        this.customer = customerRepository.find(idCustomer);
+        System.out.println("Hello customer : " + customer.getFirstName());
+    }
 
-//        System.out.println("Welcome \n1. small coffee (2.50 CHF) " +
-//                "\n2. medium coffee (3.00 CHF)\n3. large coffee (3.50 CHF) \n4. Bacon Roll (4.50 CHF) " +
-//                "\n5. orange juice (3.95 CHF) \n6. Extra milk (0.30 CHF) \n7. Foamed milk (0.50 CHF) " +
-//                "\n8. roast coffee (0.90 CHF) \n9. Done \n10. exit");
+    public void menu() {
+
+        System.out.println("Welcome \n1. small coffee (2.50 CHF) " +
+                "\n2. medium coffee (3.00 CHF)\n3. large coffee (3.50 CHF) \n4. Bacon Roll (4.50 CHF) " +
+                "\n5. orange juice (3.95 CHF) \n6. Extra milk (0.30 CHF) \n7. Foamed milk (0.50 CHF) " +
+                "\n8. roast coffee (0.90 CHF) \n9. Done \n10. exit");
     }
 
     public void quantity(Scanner input, Product p) {
