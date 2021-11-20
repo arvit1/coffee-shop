@@ -1,7 +1,9 @@
 package com.arvit.core;
 
+import com.arvit.core.domain.Customer;
 import com.arvit.core.domain.Product;
 import com.arvit.core.domain.Receipt;
+import com.arvit.core.repository.CustomerRepository;
 import com.arvit.core.services.CoffeeShopService;
 import com.arvit.core.services.CoffeeShopServiceImpl;
 
@@ -12,6 +14,7 @@ import java.util.Scanner;
 public class StartApplication {
     List<Product> productList = new ArrayList<>();
     CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
+    CustomerRepository customerRepository = new CustomerRepository();
 
     public static void main(String[] args) {
         Scanner input;
@@ -79,10 +82,15 @@ public class StartApplication {
     }
 
     public void menu() {
-        System.out.println("Welcome \n1. small coffee (2.50 CHF) " +
-                "\n2. medium coffee (3.00 CHF)\n3. large coffee (3.50 CHF) \n4. Bacon Roll (4.50 CHF) " +
-                "\n5. orange juice (3.95 CHF) \n6. Extra milk (0.30 CHF) \n7. Foamed milk (0.50 CHF) " +
-                "\n8. roast coffee (0.90 CHF) \n9. Done \n10. exit");
+        System.out.println("Select Customer");
+        for (Customer customer : customerRepository.getAll()){
+            System.out.println(customer);
+        }
+
+//        System.out.println("Welcome \n1. small coffee (2.50 CHF) " +
+//                "\n2. medium coffee (3.00 CHF)\n3. large coffee (3.50 CHF) \n4. Bacon Roll (4.50 CHF) " +
+//                "\n5. orange juice (3.95 CHF) \n6. Extra milk (0.30 CHF) \n7. Foamed milk (0.50 CHF) " +
+//                "\n8. roast coffee (0.90 CHF) \n9. Done \n10. exit");
     }
 
     public void quantity(Scanner input, Product p) {
@@ -96,5 +104,6 @@ public class StartApplication {
     public void done() {
         Receipt receipt = coffeeShopService.get(productList);
         System.out.println(receipt);
+        System.exit(0);
     }
 }
