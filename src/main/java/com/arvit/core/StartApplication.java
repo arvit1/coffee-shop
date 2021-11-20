@@ -94,6 +94,7 @@ public class StartApplication {
         int idCustomer = input.nextInt();
         if (idCustomer == 0){
             System.out.println("create a new customer comma delimited firstName, lastName, birthDate (example \"2013-09-18\")");
+            input.nextLine();
             String s = input.nextLine();
             String[] tokens=s.split(",");
             customer = new Customer(CustomerRepository.id++, tokens[0], tokens[1], tokens[2]);
