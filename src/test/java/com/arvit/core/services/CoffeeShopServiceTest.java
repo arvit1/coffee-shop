@@ -37,7 +37,7 @@ public class CoffeeShopServiceTest {
             coffee with special roast, bacon roll)
          */
         Customer c = customerRepository.find(1);
-        c.setNrBeverages(4);
+        c.setNrBeverages(3);
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
 
@@ -58,7 +58,7 @@ public class CoffeeShopServiceTest {
 
         System.out.println(receipt);
 
-        Assert.assertNotNull(receipt);
+        Assert.assertTrue(receipt.toString().contains("Total     : 8.40 CHF"));
 
     }
 
@@ -83,7 +83,7 @@ public class CoffeeShopServiceTest {
             coffee with special roast, bacon roll 2)
          */
         Customer c = customerRepository.find(1);
-        c.setNrBeverages(3);
+        c.setNrBeverages(2);
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
 
@@ -107,7 +107,7 @@ public class CoffeeShopServiceTest {
 
         System.out.println(receipt);
 
-        Assert.assertNotNull(receipt);
+        Assert.assertTrue(receipt.toString().contains("Total     : 15.50 CHF"));
 
     }
 
