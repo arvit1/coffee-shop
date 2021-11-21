@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CustomerRepository {
-    public static List<Customer> customers = new CopyOnWriteArrayList<>();
+    private static List<Customer> customers = new CopyOnWriteArrayList<>();
     public static int id = 1;
     static {
         Customer customer = new Customer(id++, "John", "Doe", new Date(1506404935902L), 3);

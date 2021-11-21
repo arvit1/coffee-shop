@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ProductRepository {
-    List<Product> products = new CopyOnWriteArrayList<>();
+    private static List<Product> products = new CopyOnWriteArrayList<>();
     public static int id = 1;
-    public ProductRepository() {
+    static {
         Product p1 = new Product(id++,"small coffee", 2.50,"CHF","B");
         Product p2 = new Product(id++,"medium coffee", 3.00,"CHF","B");
         Product p3 = new Product(id++,"large coffee", 3.50,"CHF","B");
@@ -24,6 +24,7 @@ public class ProductRepository {
         products.add(p6);
         products.add(p7);
     }
+    public ProductRepository() { }
 
     public List<Product> getAll(){
         return products;
