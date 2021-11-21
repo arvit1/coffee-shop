@@ -19,7 +19,7 @@ Bonus Program
 ## 1. Input the element in the test
 
         list of products the shopper wants to purchase (large coffee with extra milk, small
-            coffee with special roast, bacon roll, orange juice)
+            coffee with special roast, bacon roll)
 
         Product p1 = new Product("A","large coffee", 3.50,"CHF","B");
         Product p2 = new Product("B", "Extra milk", 0.30,"CHF","E");
@@ -28,7 +28,6 @@ Bonus Program
         Product p4 = new Product("D", "Special roast", 0.90,"CHF","E");
 
         Product p5 = new Product("E","Bacon Roll", 4.50,"CHF","S");
-        Product p6 = new Product("F", "orange juice", 3.95,"CHF","E");            
          
 ## 2. Run the test
 ```
@@ -43,7 +42,6 @@ Extra milk, 0.3, CHF
 small coffee, 2.5, CHF
 Special roast, 0.9, CHF
 Bacon Roll, 4.5, CHF
-orange juice, 3.95, CHF
 Extra milk, -0.3, CHF  --> discount generated
 Total     : 15.35 CHF
 

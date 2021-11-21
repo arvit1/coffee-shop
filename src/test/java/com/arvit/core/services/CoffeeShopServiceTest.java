@@ -32,7 +32,7 @@ public class CoffeeShopServiceTest {
 
         /*
         list of products the shopper wants to purchase (large coffee with extra milk, small
-            coffee with special roast, bacon roll, orange juice)
+            coffee with special roast, bacon roll)
          */
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
@@ -67,7 +67,6 @@ public class CoffeeShopServiceTest {
         Her Offering
         • Coffee (small, medium, large) 2.50 CHF, 3.00 CHF, 3.50 CHF --> BEVERAGE(B)
         • Bacon Roll 4.50 CHF --> SNACK(S)
-        • Freshly squeezed orange juice (0.25l) 3.95 CHF --> BEVERAGE(B)
         Extras(E):
         • Extra milk 0.30 CHF
         • Foamed milk 0.50 CHF
@@ -78,7 +77,7 @@ public class CoffeeShopServiceTest {
 
         /*
         list of products the shopper wants to purchase (large coffee with extra milk, small
-            coffee with special roast, bacon roll 2, orange juice)
+            coffee with special roast, bacon roll 2)
          */
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
