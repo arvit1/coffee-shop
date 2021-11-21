@@ -114,7 +114,7 @@ public class StartApplication {
     }
 
     public void done() {
-        Receipt receipt = coffeeShopService.get(productList);
+        Receipt receipt = coffeeShopService.get(productList, this.customer);
         System.out.println(receipt);
         System.exit(0);
     }

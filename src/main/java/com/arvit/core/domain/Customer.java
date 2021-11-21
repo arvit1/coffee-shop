@@ -46,6 +46,10 @@ public class Customer {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
+    public int getNrBeverages() { return nrBeverages; }
+
+    public void setNrBeverages(int nrBeverages) { this.nrBeverages = nrBeverages; }
+
     @Override
     public String toString() {
         return "id='" + id + '\'' +

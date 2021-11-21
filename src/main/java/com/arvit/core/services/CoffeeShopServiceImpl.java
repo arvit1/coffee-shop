@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CoffeeShopServiceImpl implements  CoffeeShopService{
     Customer customer;
@@ -18,7 +19,7 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     public CoffeeShopServiceImpl(Customer customer) { this.customer = customer; }
 
     @Override
-    public Receipt get(List<Product> listProduct) {
+    public Receipt get(List<Product> listProduct, Customer customer) {
 
         //has Extra(E) for a discount
         boolean bDiscountable;
@@ -65,12 +66,14 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
         Receipt receipt = new Receipt();
         receipt.setDate(new Date());
         List<Item> items = getItemsFromProducts(listProduct);
+        List<Item> beveragesFifth = getItemsForCustomerDiscount(listProduct, customer);
 
         //put the items
         receipt.setItems(items);
 
         //add the discountable item
         receipt.getItems().addAll(itemsForDiscount);
+        receipt.getItems().addAll(beveragesFifth);
 
         //generate the id
         UUID uuid = UUID.randomUUID();
@@ -86,30 +89,9 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     }
 
     //Get Item from Products
-    private List<Item> getItemsFromProducts(List<Product> listProduct) {
-        List<Item> items = new ArrayList<>();
-        long iCountBeverage = listProduct
-                .stream()
-                .filter(p-> "B".equals(p.getTypeProduct()))
-                .count();
-
-
-
-//        for (int j = 0; j <=  ; j++) {
-//            Item i = new Item();
-//            i.setIdProduct(p.getId());
-//            i.setDescription(p.getDescription());
-//            i.setPrice(p.getPrice());
-//            i.setCurrency(p.getCurrency());
-//            i.setTypeProduct(p.getTypeProduct());
-//            items.add(i);
-//        }
-        return items;
-    }
-
     //Get Item from Products for Discount
     private List<Item> getItemsFromProductsForDiscount(List<Product> listProduct) {
-        List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<Item>();
 
         for (Product p : listProduct){
             Item i = new Item();
@@ -124,16 +106,43 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     }
 
     //Get Item from Products for Discount
-    private List<Item> getItemsForCustomerDiscount(List<Product> listProduct) {
+    private List<Item> getItemsFromProducts(List<Product> listProduct) {
         List<Item> items = new ArrayList<>();
+
         for (Product p : listProduct){
             Item i = new Item();
             i.setIdProduct(p.getId());
             i.setDescription(p.getDescription());
-            i.setPrice(p.getPrice()*(-1));
+            i.setPrice(p.getPrice());
             i.setCurrency(p.getCurrency());
             i.setTypeProduct(p.getTypeProduct());
             items.add(i);
+        }
+        return items;
+    }
+
+    //Get Item from Products for Discount
+    private List<Item> getItemsForCustomerDiscount(List<Product> listProduct, Customer customer) {
+        List<Item> items = new ArrayList<>();
+        long iCountBeverage = listProduct
+                .stream()
+                .filter(p-> "B".equals(p.getTypeProduct()))
+                .count();
+
+        List<Product> products = listProduct
+                .stream()
+                .filter(p -> "B".equals(p.getTypeProduct())).collect(Collectors.toList());
+        long lbefore = (customer.getNrBeverages()) % 5;
+        long lafter = (customer.getNrBeverages() + iCountBeverage) % 5;
+
+        if (lbefore > lafter && customer.getNrBeverages() != 0){
+                Item i = new Item();
+                i.setIdProduct(products.get(0).getId());
+                i.setDescription(products.get(0).getDescription());
+                i.setPrice(products.get(0).getPrice()*(-1));
+                i.setCurrency(products.get(0).getCurrency());
+                i.setTypeProduct(products.get(0).getTypeProduct());
+                items.add(i);
         }
         return items;
     }

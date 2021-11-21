@@ -1,7 +1,9 @@
 package com.arvit.core.services;
 
+import com.arvit.core.domain.Customer;
 import com.arvit.core.domain.Product;
 import com.arvit.core.domain.Receipt;
+import com.arvit.core.repository.CustomerRepository;
 import com.arvit.core.repository.ProductRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +14,7 @@ public class CoffeeShopServiceTest {
 
     CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
     ProductRepository productRepository = new ProductRepository();
+    CustomerRepository customerRepository = new CustomerRepository();
 
     @Test
     public void discount1() {
@@ -26,7 +29,6 @@ public class CoffeeShopServiceTest {
         • Extra milk 0.30 CHF
         • Foamed milk 0.50 CHF
         • Special roast coffee 0.90 CHF
-
         */
 
 
@@ -34,6 +36,8 @@ public class CoffeeShopServiceTest {
         list of products the shopper wants to purchase (large coffee with extra milk, small
             coffee with special roast, bacon roll)
          */
+        Customer c = customerRepository.find(1);
+        c.setNrBeverages(4);
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
 
@@ -50,7 +54,7 @@ public class CoffeeShopServiceTest {
         productList.add(p5);
         productList.add(p6);
 
-        Receipt receipt = coffeeShopService.get(productList);
+        Receipt receipt = coffeeShopService.get(productList, c);
 
         System.out.println(receipt);
 
@@ -71,7 +75,6 @@ public class CoffeeShopServiceTest {
         • Extra milk 0.30 CHF
         • Foamed milk 0.50 CHF
         • Special roast coffee 0.90 CHF
-
         */
 
 
@@ -79,6 +82,8 @@ public class CoffeeShopServiceTest {
         list of products the shopper wants to purchase (large coffee with extra milk, small
             coffee with special roast, bacon roll 2)
          */
+        Customer c = customerRepository.find(1);
+        c.setNrBeverages(3);
         Product p1 = productRepository.find(3);
         Product p2 = productRepository.find(5);
 
@@ -86,8 +91,8 @@ public class CoffeeShopServiceTest {
         Product p4 = productRepository.find(7);
 
         Product p5 = productRepository.find(4);
-        Product p7 = productRepository.find(4);
-        Product p6 = productRepository.find(6);
+        Product p6 = productRepository.find(4);
+        Product p7 = productRepository.find(6);
 
 
         productList.add(p1);
@@ -98,7 +103,7 @@ public class CoffeeShopServiceTest {
         productList.add(p6);
         productList.add(p7);
 
-        Receipt receipt = coffeeShopService.get(productList);
+        Receipt receipt = coffeeShopService.get(productList, c);
 
         System.out.println(receipt);
 
