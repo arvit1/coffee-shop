@@ -2,6 +2,7 @@ package com.arvit.core.services;
 
 import com.arvit.core.domain.Product;
 import com.arvit.core.domain.Receipt;
+import com.arvit.core.repository.ProductRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 public class CoffeeShopServiceTest {
 
     CoffeeShopService coffeeShopService = new CoffeeShopServiceImpl();
+    ProductRepository productRepository = new ProductRepository();
 
     @Test
     public void discount1() {
@@ -20,7 +22,6 @@ public class CoffeeShopServiceTest {
         Her Offering
         • Coffee (small, medium, large) 2.50 CHF, 3.00 CHF, 3.50 CHF --> BEVERAGE(B)
         • Bacon Roll 4.50 CHF --> SNACK(S)
-        • Freshly squeezed orange juice (0.25l) 3.95 CHF --> BEVERAGE(B)
         Extras(E):
         • Extra milk 0.30 CHF
         • Foamed milk 0.50 CHF
@@ -33,14 +34,14 @@ public class CoffeeShopServiceTest {
         list of products the shopper wants to purchase (large coffee with extra milk, small
             coffee with special roast, bacon roll, orange juice)
          */
-        Product p1 = new Product("A","large coffee", 3.50,"CHF","B");
-        Product p2 = new Product("B", "Extra milk", 0.30,"CHF","E");
+        Product p1 = productRepository.find(3);
+        Product p2 = productRepository.find(5);
 
-        Product p3 = new Product("C","small coffee", 2.50,"CHF","B");
-        Product p4 = new Product("D", "Special roast", 0.90,"CHF","E");
+        Product p3 = productRepository.find(1);
+        Product p4 = productRepository.find(7);
 
-        Product p5 = new Product("E","Bacon Roll", 4.50,"CHF","S");
-        Product p6 = new Product("F", "orange juice", 3.95,"CHF","E");
+        Product p5 = productRepository.find(4);
+        Product p6 = productRepository.find(6);
 
         productList.add(p1);
         productList.add(p2);
@@ -79,15 +80,16 @@ public class CoffeeShopServiceTest {
         list of products the shopper wants to purchase (large coffee with extra milk, small
             coffee with special roast, bacon roll 2, orange juice)
          */
-        Product p1 = new Product("A","large coffee", 3.50,"CHF","B");
-        Product p2 = new Product("B", "Extra milk", 0.30,"CHF","E");
+        Product p1 = productRepository.find(3);
+        Product p2 = productRepository.find(5);
 
-        Product p3 = new Product("C","small coffee", 2.50,"CHF","B");
-        Product p4 = new Product("D", "Special roast", 0.90,"CHF","E");
+        Product p3 = productRepository.find(1);
+        Product p4 = productRepository.find(7);
 
-        Product p5 = new Product("E","Bacon Roll", 4.50,"CHF","S");
-        Product p7 = new Product("E","Bacon Roll", 4.50,"CHF","S");
-        Product p6 = new Product("F", "orange juice", 3.95,"CHF","E");
+        Product p5 = productRepository.find(4);
+        Product p7 = productRepository.find(4);
+        Product p6 = productRepository.find(6);
+
 
         productList.add(p1);
         productList.add(p2);

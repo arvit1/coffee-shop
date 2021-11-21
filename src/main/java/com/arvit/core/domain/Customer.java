@@ -9,15 +9,17 @@ public class Customer {
     String firstName;
     String lastName;
     Date birthDate;
+    int nrBeverages;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public Customer() { }
 
-    public Customer(int id, String firstName, String lastName, Date birthDate) {
+    public Customer(int id, String firstName, String lastName, Date birthDate, int nrBeverages) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.nrBeverages = nrBeverages;
     }
 
     public Customer(int id, String firstName, String lastName, String birthDate) throws ParseException {
@@ -25,6 +27,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = sdf.parse(birthDate);
+        this.nrBeverages = 0;
     }
 
     public void setId(int id) { this.id = id; }

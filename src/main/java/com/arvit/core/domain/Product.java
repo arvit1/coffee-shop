@@ -1,7 +1,7 @@
 package com.arvit.core.domain;
 
 public class Product {
-    String id;
+    int id;
     String description;
     Double price;
     String currency;
@@ -9,7 +9,7 @@ public class Product {
 
     public Product() { }
 
-    public Product(String id, String description, Double price, String currency, String typeProduct) {
+    public Product(int id, String description, Double price, String currency, String typeProduct) {
         this.id = id;
         this.description = description;
         this.price = price;
@@ -17,9 +17,9 @@ public class Product {
         this.typeProduct = typeProduct;
     }
 
-    public String getId() { return id; }
+    public int getId() { return id; }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     public String getDescription() { return description; }
 

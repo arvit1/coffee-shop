@@ -1,5 +1,6 @@
 package com.arvit.core.services;
 
+import com.arvit.core.domain.Customer;
 import com.arvit.core.domain.Item;
 import com.arvit.core.domain.Product;
 import com.arvit.core.domain.Receipt;
@@ -10,6 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class CoffeeShopServiceImpl implements  CoffeeShopService{
+    Customer customer;
+
+    public CoffeeShopServiceImpl() { }
+
+    public CoffeeShopServiceImpl(Customer customer) { this.customer = customer; }
 
     @Override
     public Receipt get(List<Product> listProduct) {
@@ -82,12 +88,34 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     //Get Item from Products
     private List<Item> getItemsFromProducts(List<Product> listProduct) {
         List<Item> items = new ArrayList<>();
+        long iCountBeverage = listProduct
+                .stream()
+                .filter(p-> "B".equals(p.getTypeProduct()))
+                .count();
+
+
+
+//        for (int j = 0; j <=  ; j++) {
+//            Item i = new Item();
+//            i.setIdProduct(p.getId());
+//            i.setDescription(p.getDescription());
+//            i.setPrice(p.getPrice());
+//            i.setCurrency(p.getCurrency());
+//            i.setTypeProduct(p.getTypeProduct());
+//            items.add(i);
+//        }
+        return items;
+    }
+
+    //Get Item from Products for Discount
+    private List<Item> getItemsFromProductsForDiscount(List<Product> listProduct) {
+        List<Item> items = new ArrayList<>();
 
         for (Product p : listProduct){
             Item i = new Item();
             i.setIdProduct(p.getId());
             i.setDescription(p.getDescription());
-            i.setPrice(p.getPrice());
+            i.setPrice(p.getPrice()*(-1));
             i.setCurrency(p.getCurrency());
             i.setTypeProduct(p.getTypeProduct());
             items.add(i);
@@ -96,9 +124,8 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     }
 
     //Get Item from Products for Discount
-    private List<Item> getItemsFromProductsForDiscount(List<Product> listProduct) {
+    private List<Item> getItemsForCustomerDiscount(List<Product> listProduct) {
         List<Item> items = new ArrayList<>();
-
         for (Product p : listProduct){
             Item i = new Item();
             i.setIdProduct(p.getId());

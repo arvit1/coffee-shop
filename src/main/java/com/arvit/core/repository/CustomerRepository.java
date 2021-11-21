@@ -10,10 +10,10 @@ public class CustomerRepository {
     List<Customer> customers = new CopyOnWriteArrayList<>();
     public static int id = 1;
     public CustomerRepository() {
-        Customer customer = new Customer(id++, "John", "Doe", new Date(1506404935902L));
-        Customer customer1 = new Customer(id++, "Tom", "Fox", new Date(1406404935902L));
-        Customer customer2 = new Customer(id++, "Aron", "Jager", new Date(1516404935902L));
-        Customer customer3 = new Customer(id++, "Jerry", "Bald", new Date(1496404935902L));
+        Customer customer = new Customer(id++, "John", "Doe", new Date(1506404935902L), 3);
+        Customer customer1 = new Customer(id++, "Tom", "Fox", new Date(1406404935902L), 4);
+        Customer customer2 = new Customer(id++, "Aron", "Jager", new Date(1516404935902L), 5);
+        Customer customer3 = new Customer(id++, "Jerry", "Bald", new Date(1496404935902L), 8);
         customers.add(customer);
         customers.add(customer1);
         customers.add(customer2);
