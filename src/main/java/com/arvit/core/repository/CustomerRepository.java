@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CustomerRepository {
-    List<Customer> customers = new CopyOnWriteArrayList<>();
+    public static List<Customer> customers = new CopyOnWriteArrayList<>();
     public static int id = 1;
-    public CustomerRepository() {
+    static {
         Customer customer = new Customer(id++, "John", "Doe", new Date(1506404935902L), 3);
         Customer customer1 = new Customer(id++, "Tom", "Fox", new Date(1406404935902L), 4);
         Customer customer2 = new Customer(id++, "Aron", "Jager", new Date(1516404935902L), 5);
@@ -19,6 +19,7 @@ public class CustomerRepository {
         customers.add(customer2);
         customers.add(customer3);
     }
+    public CustomerRepository() { }
 
     public List<Customer> getAll(){
         return customers;

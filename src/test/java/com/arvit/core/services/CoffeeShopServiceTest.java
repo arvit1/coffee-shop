@@ -83,8 +83,12 @@ public class CoffeeShopServiceTest {
             coffee with special roast, bacon roll 2)
          */
         Customer c = customerRepository.find(1);
-        c.setNrBeverages(2);
+        c.setNrBeverages(8);
         Product p1 = productRepository.find(3);
+        Product p11 = productRepository.find(3);
+        Product p12 = productRepository.find(3);
+        Product p13 = productRepository.find(3);
+        Product p14 = productRepository.find(3);
         Product p2 = productRepository.find(5);
 
         Product p3 = productRepository.find(1);
@@ -96,6 +100,10 @@ public class CoffeeShopServiceTest {
 
 
         productList.add(p1);
+        productList.add(p11);
+        productList.add(p12);
+        productList.add(p13);
+        productList.add(p14);
         productList.add(p2);
         productList.add(p3);
         productList.add(p4);
@@ -107,7 +115,7 @@ public class CoffeeShopServiceTest {
 
         System.out.println(receipt);
 
-        Assert.assertTrue(receipt.toString().contains("Total     : 15.50 CHF"));
+        Assert.assertTrue(receipt.toString().contains("Total     : 26.00 CHF"));
 
     }
 

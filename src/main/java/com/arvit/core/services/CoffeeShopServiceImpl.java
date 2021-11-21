@@ -4,6 +4,7 @@ import com.arvit.core.domain.Customer;
 import com.arvit.core.domain.Item;
 import com.arvit.core.domain.Product;
 import com.arvit.core.domain.Receipt;
+import com.arvit.core.repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class CoffeeShopServiceImpl implements  CoffeeShopService{
     Customer customer;
+    CustomerRepository customerRepository = new CustomerRepository();
 
     public CoffeeShopServiceImpl() { }
 
@@ -88,7 +90,6 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
         return receipt;
     }
 
-    //Get Item from Products
     //Get Item from Products for Discount
     private List<Item> getItemsFromProductsForDiscount(List<Product> listProduct) {
         List<Item> items = new ArrayList<Item>();
@@ -124,7 +125,7 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
     //Get Item from Products for Discount
     private List<Item> getItemsForCustomerDiscount(List<Product> listProduct, Customer customer) {
         List<Item> items = new ArrayList<>();
-        long iCountBeverage = listProduct
+        int iCountBeverage = (int)listProduct
                 .stream()
                 .filter(p-> "B".equals(p.getTypeProduct()))
                 .count();
@@ -132,18 +133,22 @@ public class CoffeeShopServiceImpl implements  CoffeeShopService{
         List<Product> products = listProduct
                 .stream()
                 .filter(p -> "B".equals(p.getTypeProduct())).collect(Collectors.toList());
-        long lbefore = (customer.getNrBeverages()) % 5;
-        long lafter = (customer.getNrBeverages() + iCountBeverage) % 5;
+        int nrBeverages = customer.getNrBeverages();
+        int fifthMultiplier = ((nrBeverages + iCountBeverage) / 5) - (nrBeverages / 5);
 
-        if (lbefore > lafter && customer.getNrBeverages() != 0){
+        if (fifthMultiplier > 0 && nrBeverages != 0){
+            for (int j = 0; j < fifthMultiplier; j++) {
                 Item i = new Item();
-                i.setIdProduct(products.get(0).getId());
-                i.setDescription(products.get(0).getDescription());
-                i.setPrice(products.get(0).getPrice()*(-1));
-                i.setCurrency(products.get(0).getCurrency());
-                i.setTypeProduct(products.get(0).getTypeProduct());
+                i.setIdProduct(products.get(j).getId());
+                i.setDescription(products.get(j).getDescription());
+                i.setPrice(products.get(j).getPrice() * (-1));
+                i.setCurrency(products.get(j).getCurrency());
+                i.setTypeProduct(products.get(j).getTypeProduct());
                 items.add(i);
+            }
         }
+        customer.setNrBeverages(nrBeverages + iCountBeverage);
+        customerRepository.update(customer);
         return items;
     }
 
